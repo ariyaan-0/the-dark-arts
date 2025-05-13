@@ -1,4 +1,4 @@
-// Problem link: https://leetcode.com/problems/two-sum/submissions/1633054263/
+// Problem link: https://leetcode.com/problems/two-sum/description/
 
 // Input: nums = [2,7,11,15], target = 9
 // Output: [0,1]
