@@ -1,40 +1,45 @@
-class ListNode{
-    public data: number;
-    public next: ListNode | null;
-
-    constructor(data: number){
-        this.data = data;
-        this.next = null; 
-    }
+type ListNode<T> = {
+    value: T,
+    next?: ListNode<T>
 }
 
-class LinkedList{
-    public head: ListNode | null;
-    
-    constructor(head){
-        this.head = head;
+class LinkedList<T>{
+    public length: number;
+    private head?: ListNode<T>;
+    private tail?: ListNode<T>;
+
+    constructor() {
+        this.head = this.tail = undefined;
+        this.length = 0;
     }
 
-    public print(): void{
+    add(item: T): void {
+        const node = {value: item} as ListNode<T>;
+        this.length++;
+        if(!this.tail){
+            this.tail = this.head = node;
+            return;
+        }
+        this.tail.next = node; //the link up with current tail
+        this.tail = node; //updating the tail
+    }
+
+    printList(): void{
         let temp = this.head;
-        while(temp!==null){
-            console.log(temp.data);
-            temp = temp.next; 
+        if(!temp) return;
+        while(temp.value){
+            console.log(temp.value);
+            temp = temp?.next;
+            if(!temp) return;
         }
     }
+
+
 }
 
-let nodeOne = new ListNode(5);
-let nodeTwo = new ListNode(15);
-let nodeThree = new ListNode(12);
-let nodeFour = new ListNode(9);
-let nodeFive = new ListNode(29);
+const myList = new LinkedList();
+myList.add(2);
+myList.add(4);
+myList.add(6);
 
-nodeOne.next = nodeTwo;
-nodeTwo.next = nodeThree;
-nodeThree.next = nodeFour;
-nodeFour.next = nodeFive; 
-
-let linkedList = new LinkedList(nodeOne); 
-
-linkedList.print();
+myList.printList();
